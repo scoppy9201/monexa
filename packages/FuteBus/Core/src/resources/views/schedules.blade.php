@@ -12,7 +12,9 @@
             x-data="{
                 from: '',
                 to: '',
-                groups: @js(__('core::schedules.groups')),
+                fromOpen: false,
+                toOpen: false,
+                groups: @js($scheduleGroups),
                 normalize(value) {
                     return String(value ?? '')
                         .normalize('NFD')
@@ -33,14 +35,36 @@
                 hasResults() {
                     return this.groups.some((group) => this.filtered(group).length > 0);
                 },
+                suggestions(type) {
+                    const field = type === 'from' ? 'from' : 'to';
+                    const oppositeField = type === 'from' ? 'to' : 'from';
+                    const keyword = this.normalize(this[field].trim());
+                    const oppositeKeyword = this.normalize(this[oppositeField].trim());
+                    const routes = this.groups.flat().filter((route) => {
+                        return oppositeKeyword === ''
+                            || this.normalize(route[oppositeField]).includes(oppositeKeyword);
+                    });
+                    const values = routes
+                        .map((route) => route[field])
+                        .filter((value) => this.normalize(value).includes(keyword));
+
+                    return [...new Map(values.map((value) => [this.normalize(value), value])).values()]
+                        .slice(0, 12);
+                },
+                choosePoint(type, value) {
+                    this[type] = value;
+                    this[`${type}Open`] = false;
+                },
                 swap() {
                     [this.from, this.to] = [this.to, this.from];
+                    this.fromOpen = false;
+                    this.toOpen = false;
                 },
             }"
         >
             <section aria-label="{{ __('core::app.home.navbar.schedules') }}">
                 <div class="relative grid gap-3 sm:grid-cols-2 sm:gap-6">
-                    <label class="relative block">
+                    <div class="relative" @click.outside="fromOpen = false">
                         <span class="sr-only">{{ __('core::schedules.from_placeholder') }}</span>
                         <x-heroicon-o-magnifying-glass
                             class="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-gray-400"
@@ -48,10 +72,30 @@
                         <input
                             type="search"
                             x-model.debounce.150ms="from"
+                            @focus="fromOpen = true"
+                            @input="fromOpen = true"
+                            @keydown.escape="fromOpen = false"
                             placeholder="{{ __('core::schedules.from_placeholder') }}"
                             class="h-11 w-full rounded-full border border-gray-300 bg-white pl-13 pr-5 text-base font-semibold text-gray-900 outline-none transition placeholder:font-medium placeholder:text-gray-400 focus:border-[#ef5222] focus:ring-3 focus:ring-[#ef5222]/10"
                         >
-                    </label>
+                        <div
+                            x-cloak
+                            x-show="fromOpen && suggestions('from').length > 0"
+                            x-transition.opacity.duration.150ms
+                            class="scrollbar-hidden absolute inset-x-0 top-full z-30 mt-2 max-h-72 overflow-y-auto rounded-2xl border border-gray-200 bg-white py-2 shadow-[0_12px_30px_rgba(15,23,42,.16)]"
+                        >
+                            <template x-for="point in suggestions('from')" :key="point">
+                                <button
+                                    type="button"
+                                    @click="choosePoint('from', point)"
+                                    class="flex w-full items-center gap-3 px-5 py-3 text-left text-sm font-semibold text-gray-800 transition hover:bg-orange-50 hover:text-[#ef5222]"
+                                >
+                                    <x-heroicon-o-map-pin class="size-4.5 shrink-0 text-[#00613d]" />
+                                    <span x-text="point"></span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
 
                     <button
                         type="button"
@@ -65,7 +109,7 @@
                         />
                     </button>
 
-                    <label class="relative block">
+                    <div class="relative" @click.outside="toOpen = false">
                         <span class="sr-only">{{ __('core::schedules.to_placeholder') }}</span>
                         <x-heroicon-o-magnifying-glass
                             class="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-gray-400"
@@ -73,10 +117,30 @@
                         <input
                             type="search"
                             x-model.debounce.150ms="to"
+                            @focus="toOpen = true"
+                            @input="toOpen = true"
+                            @keydown.escape="toOpen = false"
                             placeholder="{{ __('core::schedules.to_placeholder') }}"
                             class="h-11 w-full rounded-full border border-gray-300 bg-white pl-13 pr-5 text-base font-semibold text-gray-900 outline-none transition placeholder:font-medium placeholder:text-gray-400 focus:border-[#ef5222] focus:ring-3 focus:ring-[#ef5222]/10"
                         >
-                    </label>
+                        <div
+                            x-cloak
+                            x-show="toOpen && suggestions('to').length > 0"
+                            x-transition.opacity.duration.150ms
+                            class="scrollbar-hidden absolute inset-x-0 top-full z-30 mt-2 max-h-72 overflow-y-auto rounded-2xl border border-gray-200 bg-white py-2 shadow-[0_12px_30px_rgba(15,23,42,.16)]"
+                        >
+                            <template x-for="point in suggestions('to')" :key="point">
+                                <button
+                                    type="button"
+                                    @click="choosePoint('to', point)"
+                                    class="flex w-full items-center gap-3 px-5 py-3 text-left text-sm font-semibold text-gray-800 transition hover:bg-orange-50 hover:text-[#ef5222]"
+                                >
+                                    <x-heroicon-o-map-pin class="size-4.5 shrink-0 text-[#00613d]" />
+                                    <span x-text="point"></span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-6 hidden grid-cols-[minmax(0,1fr)_130px_130px_175px] items-center gap-4 rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-[15px] font-extrabold text-gray-950 md:grid">
@@ -108,7 +172,10 @@
                                             <dt class="text-xs font-bold text-gray-500 md:hidden">
                                                 {{ __('core::schedules.vehicle_type') }}
                                             </dt>
-                                            <dd class="mt-1 truncate text-sm font-semibold text-gray-950 md:mt-0 md:text-base" x-text="route.vehicle"></dd>
+                                            <dd
+                                                class="mt-1 truncate text-sm font-semibold text-gray-950 md:mt-0 md:text-base"
+                                                x-text="route.vehicle || @js(__('core::schedules.updating'))"
+                                            ></dd>
                                         </div>
                                         <div class="min-w-0 md:block">
                                             <dt class="text-xs font-bold text-gray-500 md:hidden">
