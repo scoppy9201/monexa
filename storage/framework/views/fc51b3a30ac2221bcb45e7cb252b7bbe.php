@@ -213,7 +213,7 @@
             <a href="<?php echo e(route('ticket-lookup')); ?>" class="<?php echo e(request()->routeIs('ticket-lookup') ? 'futa-nav-active relative' : ''); ?> py-5.75 text-sm font-extrabold whitespace-nowrap"><?php echo e(__('core::app.home.navbar.lookup')); ?></a>
             <a href="<?php echo e(route('news')); ?>" class="<?php echo e(request()->routeIs('news') ? 'futa-nav-active relative' : ''); ?> py-5.75 text-sm font-extrabold whitespace-nowrap"><?php echo e(__('core::app.home.navbar.news')); ?></a>
             <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap"><?php echo e(__('core::app.home.navbar.invoice')); ?></a>
-            <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap"><?php echo e(__('core::app.home.navbar.contact')); ?></a>
+            <a href="<?php echo e(route('contact')); ?>" class="<?php echo e(request()->routeIs('contact*') ? 'futa-nav-active relative' : ''); ?> py-5.75 text-sm font-extrabold whitespace-nowrap"><?php echo e(__('core::app.home.navbar.contact')); ?></a>
             <a href="<?php echo e(route('about')); ?>" class="<?php echo e(request()->routeIs('about') ? 'futa-nav-active relative' : ''); ?> py-5.75 text-sm font-extrabold whitespace-nowrap"><?php echo e(__('core::app.home.navbar.about')); ?></a>
         </div>
     </nav>

@@ -59,9 +59,40 @@
         content: "";
     }
 
+    .contact-layout {
+        display: grid;
+        gap: 2.5rem;
+    }
+
+    .contact-company-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        transition:
+            grid-template-rows 300ms ease,
+            opacity 220ms ease;
+    }
+
+    .contact-company-panel.is-open {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
+
+    .contact-submit {
+        height: 2rem;
+        min-width: 10rem;
+    }
+
     @media (min-width: 640px) {
         .futa-nav-active::after {
             bottom: 13px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .contact-layout {
+            grid-template-columns: 360px minmax(0, 1fr);
+            gap: 3.5rem;
         }
     }
 }

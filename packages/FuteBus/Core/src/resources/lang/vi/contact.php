@@ -1,0 +1,42 @@
+<?php
+
+return [
+    'meta' => [
+        'title'       => 'Liên hệ - FUTA Bus Lines',
+        'description' => 'Liên hệ FUTA Bus Lines để được tư vấn và hỗ trợ nhanh chóng.',
+    ],
+    'title'            => 'Liên hệ với chúng tôi',
+    'company'          => 'Công ty Cổ phần Xe khách Phương Trang - FUTA Bus Lines',
+    'address_label'    => 'Địa chỉ:',
+    'address'          => '486-486A Lê Văn Lương, Phường Tân Hưng, TP.HCM, Việt Nam.',
+    'website_label'    => 'Website:',
+    'phone_label'      => 'Điện thoại:',
+    'fax_label'        => 'Fax:',
+    'email_label'      => 'Email:',
+    'hotline_label'    => 'Hotline:',
+    'form_title'       => 'Gửi thông tin liên hệ đến chúng tôi',
+    'department'       => 'FUTA Bus Lines',
+    'name'             => 'Họ và tên',
+    'email'            => 'Email',
+    'phone'            => 'Điện thoại',
+    'subject'          => 'Nhập Tiêu đề',
+    'message'          => 'Nhập ghi chú',
+    'send'             => 'Gửi',
+    'success'          => 'Thông tin của bạn đã được gửi. FUTA Bus Lines sẽ phản hồi trong thời gian sớm nhất.',
+    'floating_support' => 'Liên hệ hỗ trợ',
+    'validation'       => [
+        'required' => 'Vui lòng nhập :attribute.',
+        'email'    => ':attribute không đúng định dạng.',
+        'max'      => ':attribute không được vượt quá :max ký tự.',
+        'regex'    => ':attribute không đúng định dạng.',
+        'in'       => ':attribute đã chọn không hợp lệ.',
+    ],
+    'attributes'       => [
+        'department' => 'bộ phận liên hệ',
+        'name'       => 'họ và tên',
+        'email'      => 'email',
+        'phone'      => 'số điện thoại',
+        'subject'    => 'tiêu đề',
+        'message'    => 'ghi chú',
+    ],
+];
