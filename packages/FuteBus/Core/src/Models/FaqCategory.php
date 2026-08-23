@@ -15,9 +15,9 @@ class FaqCategory extends Model
     protected function casts(): array
     {
         return [
-            'name' => 'array',
+            'name'        => 'array',
             'description' => 'array',
-            'is_active' => 'boolean',
+            'is_active'   => 'boolean',
         ];
     }
 

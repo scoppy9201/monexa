@@ -15,8 +15,8 @@ class FaqQuestion extends Model
     protected function casts(): array
     {
         return [
-            'question' => 'array',
-            'answer' => 'array',
+            'question'  => 'array',
+            'answer'    => 'array',
             'is_active' => 'boolean',
         ];
     }
