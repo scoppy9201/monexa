@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FuteBus\Core\Http\Controllers;
 
 use FuteBus\Core\Models\BranchRegion;
+use FuteBus\Core\Models\BusRoute;
 use FuteBus\Core\Models\FaqCategory;
 use FuteBus\Core\Models\NewsArticle;
 use FuteBus\Core\Models\Promotion;
@@ -126,6 +127,20 @@ class HomeController extends Controller
 
     public function schedules()
     {
-        return view('core::schedules');
+        $scheduleGroups = BusRoute::active()
+            ->publicSchedule()
+            ->scheduleOrder()
+            ->get()
+            ->groupBy('schedule_group')
+            ->map(fn ($routes) => $routes->map(fn (BusRoute $route) => [
+                'from'     => $route->origin_city,
+                'to'       => $route->destination_city,
+                'vehicle'  => $route->vehicle_type,
+                'distance' => $route->distance_km,
+                'hours'    => round($route->duration_minutes / 60, 1),
+            ])->values())
+            ->values();
+
+        return view('core::schedules', compact('scheduleGroups'));
     }
 }

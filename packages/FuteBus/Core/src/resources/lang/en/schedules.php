@@ -12,6 +12,6 @@ return [
     'vehicle_type'     => 'Vehicle type',
     'distance'         => 'Distance',
     'duration'         => 'Journey time',
+    'updating'         => 'Updating',
     'no_results'       => 'No matching schedules found.',
-    'groups'           => (require __DIR__.'/../vi/schedules.php')['groups'],
 ];
