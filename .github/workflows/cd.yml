@@ -88,16 +88,16 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
+          echo "${{ secrets['SSH_PRIVATE_KEY'] }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
-          ssh-keyscan -p "${{ secrets.SSH_PORT || 22 }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -p "${{ secrets['SSH_PORT'] || 22 }}" -H "${{ secrets['SSH_HOST'] }}" >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Deploy over SSH
         env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          SSH_HOST: ${{ secrets['SSH_HOST'] }}
+          SSH_PORT: ${{ secrets['SSH_PORT'] }}
+          SSH_USER: ${{ secrets['SSH_USER'] }}
+          DEPLOY_PATH: ${{ secrets['DEPLOY_PATH'] }}
           APP_IMAGE: ${{ needs.build-and-push.outputs.app_image }}
           NGINX_IMAGE: ${{ needs.build-and-push.outputs.nginx_image }}
           REGISTRY_USERNAME: ${{ github.actor }}

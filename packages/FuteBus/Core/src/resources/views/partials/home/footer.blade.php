@@ -23,6 +23,7 @@
     ];
     $companyRoutes = [
         'about' => 'about',
+        'schedule' => 'schedules',
         'privacy' => 'privacy',
         'payment' => 'payment',
         'pricing' => 'pricing',

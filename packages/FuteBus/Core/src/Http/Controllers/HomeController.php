@@ -123,4 +123,9 @@ class HomeController extends Controller
 
         return view('core::branches', ['regions' => $regions]);
     }
+
+    public function schedules()
+    {
+        return view('core::schedules');
+    }
 }
