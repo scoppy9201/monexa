@@ -21,3 +21,4 @@ Route::get('/hoi-dap', [HomeController::class, 'faq'])->name('faq');
 Route::get('/hoi-dap/{category:slug}', [HomeController::class, 'faqCategory'])->name('faq-category');
 Route::get('/chinh-sach/giai-quyet-khieu-nai', [HomeController::class, 'complaint'])->name('complaint');
 Route::get('/chinh-sach/ho-tro-khach-hang', [HomeController::class, 'customerSupport'])->name('customer-support');
+Route::get('/danh-sach-chi-nhanh', [HomeController::class, 'branches'])->name('branches');

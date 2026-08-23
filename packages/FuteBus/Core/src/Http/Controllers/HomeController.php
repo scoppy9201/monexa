@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace FuteBus\Core\Http\Controllers;
 
+use FuteBus\Core\Models\BranchRegion;
+use FuteBus\Core\Models\FaqCategory;
 use FuteBus\Core\Models\NewsArticle;
 use FuteBus\Core\Models\Promotion;
-use FuteBus\Core\Models\FaqCategory;
 use FuteBus\Core\Services\HomeService;
 use Illuminate\Routing\Controller;
 
@@ -28,8 +29,8 @@ class HomeController extends Controller
             ->get();
 
         return view('core::home', [
-            'promotions'    => $promotions,
-            'popularRoutes' => $popularRoutes,
+            'promotions'     => $promotions,
+            'popularRoutes'  => $popularRoutes,
             'newsArticles'   => $newsArticles,
         ]);
     }
@@ -96,7 +97,7 @@ class HomeController extends Controller
             ->get()
             ->map(fn ($question) => [
                 'question' => $question->localizedQuestion(),
-                'answer' => $question->localizedAnswer(),
+                'answer'   => $question->localizedAnswer(),
             ])
             ->values();
 
@@ -111,5 +112,15 @@ class HomeController extends Controller
     public function customerSupport()
     {
         return view('core::customer-support');
+    }
+
+    public function branches()
+    {
+        $regions = BranchRegion::active()
+            ->with(['offices' => fn ($query) => $query->active()->orderBy('sort_order')])
+            ->orderBy('sort_order')
+            ->get();
+
+        return view('core::branches', ['regions' => $regions]);
     }
 }

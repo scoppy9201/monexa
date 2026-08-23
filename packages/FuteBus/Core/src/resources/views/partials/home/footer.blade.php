@@ -27,6 +27,7 @@
         'payment' => 'payment',
         'pricing' => 'pricing',
         'refund' => 'refund',
+        'network' => 'branches',
     ];
     $supportRoutes = [
         'lookup' => 'ticket-lookup',
