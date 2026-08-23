@@ -19,4 +19,5 @@ Route::get('/chinh-sach/dieu-kien-cung-cap-dich-vu', [HomeController::class, 'se
     ->name('service-conditions');
 Route::get('/hoi-dap', [HomeController::class, 'faq'])->name('faq');
 Route::get('/hoi-dap/{category:slug}', [HomeController::class, 'faqCategory'])->name('faq-category');
-Route::get('/ho-tro/giai-quyet-khieu-nai', [HomeController::class, 'complaint'])->name('complaint');
+Route::get('/chinh-sach/giai-quyet-khieu-nai', [HomeController::class, 'complaint'])->name('complaint');
+Route::get('/chinh-sach/ho-tro-khach-hang', [HomeController::class, 'customerSupport'])->name('customer-support');

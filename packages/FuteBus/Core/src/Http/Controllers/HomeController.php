@@ -107,4 +107,9 @@ class HomeController extends Controller
     {
         return view('core::complaint');
     }
+
+    public function customerSupport()
+    {
+        return view('core::customer-support');
+    }
 }
