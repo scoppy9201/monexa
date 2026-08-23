@@ -50,11 +50,21 @@
 
 @php
     $today = now();
+    $isoDay = (int) $today->isoFormat('d');
+    $dayOfWeek = $isoDay === 7 ? 'CN' : 'Thứ '.($isoDay + 1);
 @endphp
 
 <section
     class="futa-hero-backdrop px-3 pt-2 pb-14.5 sm:px-4"
-    x-data="futaHeroSearch(@js(app()->getLocale()), @js($today->format('Y-m-d')))"
+    x-data="{
+        roundTrip: false,
+        returnDate: '',
+        departure: '',
+        destination: '',
+        swapLocations() {
+            [this.departure, this.destination] = [this.destination, this.departure];
+        },
+    }"
 >
     <div class="mx-auto aspect-1128/310 w-full max-w-282 overflow-hidden rounded-xl border border-white/60 bg-[#fff7f1] shadow-[0_6px_14px_rgba(67,31,18,.26)] max-sm:aspect-16/7">
         <img
@@ -74,7 +84,7 @@
                         value="one_way"
                         checked
                         class="h-4.25 w-4.25 accent-[#ef5222]"
-                        @change="setRoundTrip(false)"
+                        @change="roundTrip = false"
                     >
                     <span>{{ __('core::app.home.hero.one_way') }}</span>
                 </label>
@@ -84,7 +94,7 @@
                         name="trip_type"
                         value="round_trip"
                         class="h-4.25 w-4.25 accent-[#ef5222]"
-                        @change="setRoundTrip(true)"
+                        @change="roundTrip = true"
                     >
                     <span>{{ __('core::app.home.hero.round_trip') }}</span>
                 </label>
