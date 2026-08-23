@@ -6,10 +6,7 @@ on:
     branches:
       - dev
       - staging
-  push:
-    branches:
-      - dev
-      - staging
+      - main
 
 permissions:
   contents: read
@@ -204,82 +201,39 @@ jobs:
           CI_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: php scripts/ci/test-diff.php
 
-  docker:
-    name: Docker Build and Smoke Test
+  frontend:
+    name: Frontend Build
     runs-on: ubuntu-latest
-    needs:
-      - lint
-      - code-quality
-      - test
-    timeout-minutes: 45
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare Docker environment
-        run: |
-          cp .env.example .env
-          sed -i "s|^APP_KEY=.*|APP_KEY=$(php -r "echo 'base64:'.base64_encode(random_bytes(32));")|" .env
-
-      - name: Validate Compose manifests
-        run: |
-          docker compose config --quiet
-          APP_IMAGE=futabus-app:test NGINX_IMAGE=futabus-nginx:test \
-            docker compose -f docker-compose.yml -f docker-compose.prod.yml config --quiet
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build application image
-        uses: docker/build-push-action@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          context: .
-          target: production
-          load: true
-          tags: futabus-app:local
-          cache-from: type=gha,scope=futabus-app
-          cache-to: type=gha,mode=max,scope=futabus-app
+          node-version: "22"
+          cache: npm
 
-      - name: Build Nginx image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: docker/nginx/Dockerfile
-          load: true
-          tags: futabus-nginx:local
-          cache-from: |
-            type=gha,scope=futabus-nginx
-            type=gha,scope=futabus-app
-          cache-to: type=gha,mode=max,scope=futabus-nginx
+      - name: Install frontend dependencies
+        run: npm ci
 
-      - name: Start runtime smoke-test stack
-        run: docker compose up -d --no-build app nginx
-
-      - name: Verify HTTP and application health
-        run: |
-          for _ in $(seq 1 24); do
-            if curl --fail --silent http://127.0.0.1:8080/up; then
-              exit 0
-            fi
-            sleep 5
-          done
-          docker compose ps
-          docker compose logs app nginx
-          exit 1
-
-      - name: Stop smoke-test stack
-        if: always()
-        run: docker compose down --volumes --remove-orphans
+      - name: Build production assets
+        run: npm run build
 
   auto-merge:
-    name: Auto Merge Approved Branch Flow
+    name: Auto Merge to Dev
     if: >-
       github.event_name == 'pull_request' &&
-      (github.event.pull_request.base.ref == 'dev' ||
-       (github.event.pull_request.base.ref == 'staging' && github.event.pull_request.head.ref == 'dev'))
+      github.event.pull_request.base.ref == 'dev' &&
+      github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    needs: docker
+    needs:
+      - lint
+      - code-quality
+      - test
+      - frontend
     timeout-minutes: 5
     permissions:
       contents: write
@@ -290,10 +244,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
         run: |
-          if [ "$BASE_BRANCH" = "dev" ]; then
-            gh pr merge "$PR_URL" --merge --delete-branch
-          else
-            gh pr merge "$PR_URL" --merge
-          fi
+          gh pr merge "$PR_URL" --merge --delete-branch

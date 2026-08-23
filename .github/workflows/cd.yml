@@ -3,7 +3,6 @@ name: CD
 on:
   push:
     branches: [main]
-    tags: ["v*"]
 
 concurrency:
   group: cd-production
@@ -20,6 +19,7 @@ env:
 
 jobs:
   build-and-push:
+    if: github.ref == 'refs/heads/main'
     name: Build & Push Images
     runs-on: ubuntu-latest
     outputs:

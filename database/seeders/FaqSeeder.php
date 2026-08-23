@@ -14,8 +14,8 @@ class FaqSeeder extends Seeder
     {
         $categories = [
             [
-                'slug' => 'futa-bus-lines',
-                'name' => ['vi' => 'FUTA Bus Lines', 'en' => 'FUTA Bus Lines'],
+                'slug'        => 'futa-bus-lines',
+                'name'        => ['vi' => 'FUTA Bus Lines', 'en' => 'FUTA Bus Lines'],
                 'description' => [
                     'vi' => 'Khách hàng dễ dàng tìm kiếm các thông tin bao gồm: giá vé, hành trình, quy định...v.v.',
                     'en' => 'Quickly find information about fares, journeys, travel rules and more.',
@@ -23,8 +23,8 @@ class FaqSeeder extends Seeder
                 'image' => 'images/faq/futabus-topic.png',
             ],
             [
-                'slug' => 'futa-app',
-                'name' => ['vi' => 'FUTA App', 'en' => 'FUTA App'],
+                'slug'        => 'futa-app',
+                'name'        => ['vi' => 'FUTA App', 'en' => 'FUTA App'],
                 'description' => [
                     'vi' => 'Khách hàng dễ dàng tìm kiếm thông tin về sử dụng App, thanh toán, khuyến mãi...v.v.',
                     'en' => 'Find information about using the app, payments, promotions and more.',
@@ -32,8 +32,8 @@ class FaqSeeder extends Seeder
                 'image' => 'images/faq/futa-app-topic.png',
             ],
             [
-                'slug' => 'trung-chuyen',
-                'name' => ['vi' => 'Trung chuyển', 'en' => 'Transfer Service'],
+                'slug'        => 'trung-chuyen',
+                'name'        => ['vi' => 'Trung chuyển', 'en' => 'Transfer Service'],
                 'description' => [
                     'vi' => 'Cập nhật các thông tin về quy định trung chuyển cụ thể.',
                     'en' => 'See the latest detailed information and rules for transfer services.',
@@ -55,11 +55,11 @@ class FaqSeeder extends Seeder
             FaqQuestion::updateOrCreate(
                 [
                     'faq_category_id' => $category->id,
-                    'sort_order' => $index + 1,
+                    'sort_order'      => $index + 1,
                 ],
                 [
-                    'question' => ['vi' => $item[0], 'en' => $item[2]],
-                    'answer' => ['vi' => $item[1], 'en' => $item[3]],
+                    'question'  => ['vi' => $item[0], 'en' => $item[2]],
+                    'answer'    => ['vi' => $item[1], 'en' => $item[3]],
                     'is_active' => true,
                 ],
             );
@@ -71,11 +71,11 @@ class FaqSeeder extends Seeder
             FaqQuestion::updateOrCreate(
                 [
                     'faq_category_id' => $appCategory->id,
-                    'sort_order' => $index + 1,
+                    'sort_order'      => $index + 1,
                 ],
                 [
-                    'question' => ['vi' => $item[0], 'en' => $item[2]],
-                    'answer' => ['vi' => $item[1], 'en' => $item[3]],
+                    'question'  => ['vi' => $item[0], 'en' => $item[2]],
+                    'answer'    => ['vi' => $item[1], 'en' => $item[3]],
                     'is_active' => true,
                 ],
             );
@@ -87,11 +87,11 @@ class FaqSeeder extends Seeder
             FaqQuestion::updateOrCreate(
                 [
                     'faq_category_id' => $transferCategory->id,
-                    'sort_order' => $index + 1,
+                    'sort_order'      => $index + 1,
                 ],
                 [
-                    'question' => ['vi' => $item[0], 'en' => $item[2]],
-                    'answer' => ['vi' => $item[1], 'en' => $item[3]],
+                    'question'  => ['vi' => $item[0], 'en' => $item[2]],
+                    'answer'    => ['vi' => $item[1], 'en' => $item[3]],
                     'is_active' => true,
                 ],
             );
@@ -249,7 +249,7 @@ class FaqSeeder extends Seeder
                 [
                     'APP FUTA hỗ trợ khách hàng mua vé xe mọi lúc, mọi nơi với nhiều phương thức thanh toán tiện lợi.',
                     'Người dùng có thể quản lý lịch sử mua vé trên ứng dụng, kiểm tra lịch trình xe chạy, vị trí '
-                        . 'giường, giá vé và cập nhật các chương trình khuyến mãi của Công ty.',
+                        .'giường, giá vé và cập nhật các chương trình khuyến mãi của Công ty.',
                 ],
                 'What is the FUTA App used for?',
                 [
@@ -278,9 +278,9 @@ class FaqSeeder extends Seeder
                 'Tại sao tiền trong Ví FUTA không thể rút về tài khoản?',
                 [
                     'FUTAPay hiện hỗ trợ cùng Ngân hàng SHB. Tiền có thể được rút về tài khoản nếu nguồn tiền nạp '
-                        . 'trước đó xuất phát từ thẻ hoặc tài khoản SHB của chính khách hàng.',
+                        .'trước đó xuất phát từ thẻ hoặc tài khoản SHB của chính khách hàng.',
                     'Nếu không sử dụng SHB, số dư hiện chỉ có thể dùng để mua vé trên FUTA App. Công ty đang ghi '
-                        . 'nhận nhu cầu để mở rộng hỗ trợ thêm ngân hàng.',
+                        .'nhận nhu cầu để mở rộng hỗ trợ thêm ngân hàng.',
                     'Vui lòng liên hệ Tổng đài 1900 6067 và gặp Bộ phận Online để được tư vấn chi tiết.',
                 ],
                 'Why can I not withdraw my FUTA Wallet balance?',
@@ -312,12 +312,12 @@ class FaqSeeder extends Seeder
                 'Thông tin về dịch vụ trung chuyển tận nơi tại TPHCM là gì?',
                 [
                     'Phương Trang hỗ trợ trung chuyển tận nơi tại TPHCM cho các tuyến đi Đà Lạt, Nha Trang, '
-                        . 'Phan Thiết/Mũi Né, Phan Rang, Buôn Ma Thuột, Tây Ninh và các tỉnh miền Trung. Các tuyến '
-                        . 'miền Tây hiện chưa được hỗ trợ.',
+                        .'Phan Thiết/Mũi Né, Phan Rang, Buôn Ma Thuột, Tây Ninh và các tỉnh miền Trung. Các tuyến '
+                        .'miền Tây hiện chưa được hỗ trợ.',
                     'Đăng ký trước ít nhất 04 giờ so với giờ khởi hành; phạm vi trung chuyển từ 5 đến 7,5 km tại '
-                        . 'những điểm thuận tiện.',
+                        .'những điểm thuận tiện.',
                     'Các tuyến xuất bến tại Bến xe Miền Đông mới được hỗ trợ tại các quận nội ô TPHCM và phải '
-                        . 'đăng ký trước ít nhất 24 giờ.',
+                        .'đăng ký trước ít nhất 24 giờ.',
                     'Vui lòng liên hệ Tổng đài Trung chuyển 1900 6918 để được hỗ trợ.',
                 ],
                 'How does door-to-door transfer service work in Ho Chi Minh City?',
@@ -337,7 +337,7 @@ class FaqSeeder extends Seeder
                 'Đăng ký trung chuyển cho chuyến xuất bến tại Bến xe Miền Đông mới như thế nào?',
                 [
                     'Nếu có nhu cầu trung chuyển trong nội ô TPHCM, vui lòng liên hệ Tổng đài Trung chuyển '
-                        . '1900 6918 để cập nhật điểm đón trước giờ khởi hành ít nhất 24 giờ.',
+                        .'1900 6918 để cập nhật điểm đón trước giờ khởi hành ít nhất 24 giờ.',
                 ],
                 'How do I request transfer service for a New Eastern Bus Station departure?',
                 ['Call 1900 6918 to register an eligible inner-city pick-up point at least 24 hours before departure.'],
@@ -346,7 +346,7 @@ class FaqSeeder extends Seeder
                 'Tại sao xe trung chuyển đón sớm hơn nhiều so với giờ xe tuyến khởi hành?',
                 [
                     'Đây là dịch vụ trung chuyển công cộng kết hợp với các hãng xe tại Bến xe. Anh/Chị cần chuẩn '
-                        . 'bị hành lý trước 3–4 giờ; tài xế sẽ liên hệ để thông báo thời gian đón cụ thể.',
+                        .'bị hành lý trước 3–4 giờ; tài xế sẽ liên hệ để thông báo thời gian đón cụ thể.',
                 ],
                 'Why is transfer pick-up much earlier than the coach departure?',
                 ['The shared transfer service coordinates multiple operators. Be ready three to four hours early; the driver will confirm the pick-up time.'],
@@ -361,7 +361,7 @@ class FaqSeeder extends Seeder
                 'Tôi có được liên hệ để cập nhật điểm đón trung chuyển không?',
                 [
                     'Nhân viên tại tỉnh, thành sẽ liên hệ để tư vấn điểm đón. Tuy nhiên, Anh/Chị nên chủ động '
-                        . 'liên hệ văn phòng vé trực thuộc để cung cấp điểm đón và tránh trường hợp không thể liên lạc.',
+                        .'liên hệ văn phòng vé trực thuộc để cung cấp điểm đón và tránh trường hợp không thể liên lạc.',
                 ],
                 'Can I contact FUTA to update my transfer pick-up point?',
                 ['Yes. Contact the relevant ticket office proactively so the pick-up point can be confirmed reliably.'],
@@ -370,12 +370,12 @@ class FaqSeeder extends Seeder
                 'Cần liên hệ trước bao lâu để cập nhật điểm đón hoặc điểm trung chuyển?',
                 [
                     'Tại TPHCM, các tuyến từ Bến xe Miền Tây hoặc Bến xe An Sương cần đăng ký trước ít nhất 04 '
-                        . 'giờ; phạm vi trung chuyển từ 5 đến 7,5 km tùy địa điểm.',
+                        .'giờ; phạm vi trung chuyển từ 5 đến 7,5 km tùy địa điểm.',
                     'Các tuyến từ Bến xe Miền Đông mới cần đăng ký trước ít nhất 24 giờ; phạm vi tùy địa điểm và '
-                        . 'không gồm khu vực Nhà Bè, Cần Giờ.',
+                        .'không gồm khu vực Nhà Bè, Cần Giờ.',
                     'Liên hệ 1900 6067 hoặc 1900 6918 để được hỗ trợ tại TPHCM.',
                     'Tại các tỉnh, thành có hỗ trợ trung chuyển, đăng ký trước ít nhất 04 giờ; phạm vi thông thường '
-                        . 'từ 8 đến 10 km tùy địa điểm. Liên hệ 1900 6067 hoặc văn phòng vé trực thuộc.',
+                        .'từ 8 đến 10 km tùy địa điểm. Liên hệ 1900 6067 hoặc văn phòng vé trực thuộc.',
                 ],
                 'How early should I update a transfer pick-up point?',
                 [
@@ -387,7 +387,7 @@ class FaqSeeder extends Seeder
                 'Gần đến giờ xuất bến nhưng tôi vẫn chưa được đón thì phải làm gì?',
                 [
                     'Do đặc thù dịch vụ trung chuyển công cộng, Anh/Chị cần chuẩn bị hành lý trước 3–4 giờ so '
-                        . 'với giờ khởi hành. Trong khoảng thời gian này, tài xế sẽ liên hệ thông báo giờ đón cụ thể.',
+                        .'với giờ khởi hành. Trong khoảng thời gian này, tài xế sẽ liên hệ thông báo giờ đón cụ thể.',
                 ],
                 'What should I do if pick-up has not occurred close to departure?',
                 ['Be ready three to four hours before departure. The transfer driver will contact you with the specific pick-up time.'],
