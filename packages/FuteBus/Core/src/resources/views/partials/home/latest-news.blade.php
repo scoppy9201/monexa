@@ -9,7 +9,7 @@
             </p>
 
             <a
-                href="#"
+                href="{{ route('news') }}"
                 class="mt-3 inline-flex text-sm font-medium text-[#ef5222] transition-colors hover:text-[#d94316] sm:absolute sm:right-0 sm:top-8 sm:mt-0"
             >
                 {{ __('core::app.home.latest_news.view_all') }}
@@ -50,7 +50,7 @@
                                     <div class="h-44 overflow-hidden rounded-xl border border-gray-200 bg-white sm:h-48">
                                         @if($article->image)
                                             <img
-                                                src="{{ asset('storage/' . $article->image) }}"
+                                                src="{{ $article->imageUrl() }}"
                                                 alt="{{ __('core::app.home.latest_news.image_alt', ['title' => $article->title]) }}"
                                                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                                 loading="lazy"

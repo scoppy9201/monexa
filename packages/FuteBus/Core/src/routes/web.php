@@ -23,3 +23,4 @@ Route::get('/chinh-sach/giai-quyet-khieu-nai', [HomeController::class, 'complain
 Route::get('/chinh-sach/ho-tro-khach-hang', [HomeController::class, 'customerSupport'])->name('customer-support');
 Route::get('/danh-sach-chi-nhanh', [HomeController::class, 'branches'])->name('branches');
 Route::get('/lich-trinh', [HomeController::class, 'schedules'])->name('schedules');
+Route::get('/tin-tuc', [HomeController::class, 'news'])->name('news');
