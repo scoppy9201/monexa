@@ -17,3 +17,7 @@ Route::get('/chinh-sach/dieu-kien-giao-dich-chung', [HomeController::class, 'tra
     ->name('transaction-conditions');
 Route::get('/chinh-sach/dieu-kien-cung-cap-dich-vu', [HomeController::class, 'serviceConditions'])
     ->name('service-conditions');
+Route::get('/hoi-dap', [HomeController::class, 'faq'])->name('faq');
+Route::get('/hoi-dap/{category:slug}', [HomeController::class, 'faqCategory'])->name('faq-category');
+Route::get('/chinh-sach/giai-quyet-khieu-nai', [HomeController::class, 'complaint'])->name('complaint');
+Route::get('/chinh-sach/ho-tro-khach-hang', [HomeController::class, 'customerSupport'])->name('customer-support');

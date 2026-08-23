@@ -33,6 +33,9 @@
         'terms' => 'terms',
         'transaction' => 'transaction-conditions',
         'service' => 'service-conditions',
+        'faq' => 'faq',
+        'complaint' => 'complaint',
+        'customer' => 'customer-support',
     ];
     $brandLogos = [
         ['icons/futabus-logo.png', 'FUTA Bus Lines'],
