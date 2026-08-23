@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'meta' => [
+        'title'       => 'Tra cứu hóa đơn điện tử - FUTA Bus Lines',
+        'description' => 'Tra cứu và xác thực hóa đơn điện tử FUTA Bus Lines nhanh chóng, an toàn.',
+    ],
+    'eyebrow'            => 'Cổng hóa đơn điện tử',
+    'title'              => 'Tra cứu hóa đơn',
+    'description'        => 'Kiểm tra thông tin và xác thực hóa đơn điện tử được phát hành bởi FUTA Bus Lines.',
+    'lookup_tab'         => 'Tra cứu hóa đơn',
+    'verify_tab'         => 'Xác thực hóa đơn',
+    'lookup_title'       => 'Thông tin tra cứu',
+    'lookup_description' => 'Nhập chính xác thông tin trên vé hoặc thông báo phát hành hóa đơn.',
+    'tax_code'           => 'Mã số thuế người mua',
+    'invoice_code'       => 'Mã tra cứu hóa đơn',
+    'captcha'            => 'Mã xác thực',
+    'captcha_hint'       => 'Nhập các ký tự hiển thị bên cạnh',
+    'refresh_captcha'    => 'Đổi mã xác thực',
+    'lookup_button'      => 'Tra cứu hóa đơn',
+    'verify_title'       => 'Xác thực file hóa đơn',
+    'verify_description' => 'Tải lên file XML của hóa đơn để kiểm tra tính toàn vẹn và thông tin phát hành.',
+    'xml_file'           => 'File hóa đơn XML',
+    'choose_file'        => 'Chọn file XML',
+    'file_hint'          => 'Chỉ hỗ trợ định dạng .xml, dung lượng tối đa 5 MB',
+    'verify_button'      => 'Xác thực hóa đơn',
+    'security_title'     => 'Bảo mật thông tin',
+    'security_text'      => 'Thông tin tra cứu chỉ được sử dụng để kiểm tra hóa đơn và không được lưu trên trình duyệt.',
+    'support'            => 'Cần hỗ trợ? Liên hệ tổng đài',
+];
