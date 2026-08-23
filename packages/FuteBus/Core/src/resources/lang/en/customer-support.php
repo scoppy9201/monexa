@@ -21,7 +21,7 @@ return [
         ['label' => 'Office network', 'link' => 'View here', 'route' => 'branches'],
         ['label' => 'Ticket lookup', 'link' => 'View here', 'route' => 'ticket-lookup'],
         ['label' => 'Schedule lookup', 'link' => 'View here', 'route' => null],
-        ['label' => 'Invoice lookup', 'link' => 'View here', 'route' => null],
+        ['label' => 'Invoice lookup', 'link' => 'View here', 'route' => 'invoice'],
         ['label' => 'Latest news and promotions', 'link' => 'View here', 'route' => null],
         ['label' => 'Booking guide', 'link' => 'View here', 'route' => null],
         ['label' => 'Frequently asked questions', 'link' => 'View here', 'route' => 'faq'],

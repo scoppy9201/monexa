@@ -199,6 +199,11 @@ class HomeController extends Controller
         return view('core::contact');
     }
 
+    public function invoice()
+    {
+        return view('core::invoice');
+    }
+
     public function submitContact(Request $request)
     {
         $validated = $request->validate(

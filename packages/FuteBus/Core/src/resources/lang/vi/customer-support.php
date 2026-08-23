@@ -25,7 +25,7 @@ return [
         ['label' => 'Mạng lưới văn phòng', 'link' => 'Xem ở đây', 'route' => 'branches'],
         ['label' => 'Tra cứu vé', 'link' => 'Xem ở đây', 'route' => 'ticket-lookup'],
         ['label' => 'Tra cứu lịch trình', 'link' => 'Xem ở đây', 'route' => null],
-        ['label' => 'Tra cứu hóa đơn', 'link' => 'Xem ở đây', 'route' => null],
+        ['label' => 'Tra cứu hóa đơn', 'link' => 'Xem ở đây', 'route' => 'invoice'],
         ['label' => 'Xem tin tức và khuyến mãi mới nhất', 'link' => 'Xem ở đây', 'route' => null],
         ['label' => 'Hướng dẫn đặt vé', 'link' => 'Xem tại đây', 'route' => null],
         ['label' => 'Câu hỏi thường gặp', 'link' => 'Xem tại đây', 'route' => 'faq'],

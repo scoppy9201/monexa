@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'meta' => [
+        'title'       => 'Electronic invoice lookup - FUTA Bus Lines',
+        'description' => 'Look up and verify FUTA Bus Lines electronic invoices quickly and securely.',
+    ],
+    'eyebrow'            => 'Electronic invoice portal',
+    'title'              => 'Invoice lookup',
+    'description'        => 'Look up information and verify electronic invoices issued by FUTA Bus Lines.',
+    'lookup_tab'         => 'Invoice lookup',
+    'verify_tab'         => 'Invoice verification',
+    'lookup_title'       => 'Lookup information',
+    'lookup_description' => 'Enter the exact information shown on your ticket or invoice notification.',
+    'tax_code'           => 'Buyer tax identification number',
+    'invoice_code'       => 'Invoice lookup code',
+    'captcha'            => 'Verification code',
+    'captcha_hint'       => 'Enter the characters displayed beside the field',
+    'refresh_captcha'    => 'Refresh verification code',
+    'lookup_button'      => 'Look up invoice',
+    'verify_title'       => 'Verify invoice file',
+    'verify_description' => 'Upload the invoice XML file to validate its integrity and issuer information.',
+    'xml_file'           => 'Invoice XML file',
+    'choose_file'        => 'Choose XML file',
+    'file_hint'          => 'Only .xml files up to 5 MB are supported',
+    'verify_button'      => 'Verify invoice',
+    'security_title'     => 'Information security',
+    'security_text'      => 'Lookup information is used only to verify your invoice and is not stored in the browser.',
+    'support'            => 'Need help? Call our hotline',
+];
