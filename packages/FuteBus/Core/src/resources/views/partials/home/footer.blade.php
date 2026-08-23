@@ -24,6 +24,7 @@
     $companyRoutes = [
         'about' => 'about',
         'schedule' => 'schedules',
+        'news' => 'news',
         'privacy' => 'privacy',
         'payment' => 'payment',
         'pricing' => 'pricing',

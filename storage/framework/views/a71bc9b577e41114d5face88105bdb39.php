@@ -21,6 +21,25 @@
         'web_guide',
         'topup_guide',
     ];
+    $companyRoutes = [
+        'about' => 'about',
+        'schedule' => 'schedules',
+        'news' => 'news',
+        'privacy' => 'privacy',
+        'payment' => 'payment',
+        'pricing' => 'pricing',
+        'refund' => 'refund',
+        'network' => 'branches',
+    ];
+    $supportRoutes = [
+        'lookup' => 'ticket-lookup',
+        'terms' => 'terms',
+        'transaction' => 'transaction-conditions',
+        'service' => 'service-conditions',
+        'faq' => 'faq',
+        'complaint' => 'complaint',
+        'customer' => 'customer-support',
+    ];
     $brandLogos = [
         ['icons/futabus-logo.png', 'FUTA Bus Lines'],
         ['icons/footer-brands/futa-express.png', 'FUTA Express'],
@@ -96,7 +115,10 @@
                     <?php $__currentLoopData = $companyLinks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $link): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="flex gap-3">
                             <span class="mt-2 size-2 shrink-0 rounded-full bg-gray-300"></span>
-                            <a href="#" class="leading-5 transition-colors hover:text-[#ef5222]">
+                            <a
+                                href="<?php echo e(isset($companyRoutes[$link]) ? route($companyRoutes[$link]) : '#'); ?>"
+                                class="leading-5 transition-colors hover:text-[#ef5222]"
+                            >
                                 <?php echo e(__("core::app.home.footer.links.{$link}")); ?>
 
                             </a>
@@ -111,7 +133,10 @@
                     <?php $__currentLoopData = $supportLinks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $link): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="flex gap-3">
                             <span class="mt-2 size-2 shrink-0 rounded-full bg-gray-300"></span>
-                            <a href="#" class="leading-5 transition-colors hover:text-[#ef5222]">
+                            <a
+                                href="<?php echo e(isset($supportRoutes[$link]) ? route($supportRoutes[$link]) : '#'); ?>"
+                                class="leading-5 transition-colors hover:text-[#ef5222]"
+                            >
                                 <?php echo e(__("core::app.home.footer.links.{$link}")); ?>
 
                             </a>

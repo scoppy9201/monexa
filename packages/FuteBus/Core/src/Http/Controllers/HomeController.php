@@ -8,8 +8,10 @@ use FuteBus\Core\Models\BranchRegion;
 use FuteBus\Core\Models\BusRoute;
 use FuteBus\Core\Models\FaqCategory;
 use FuteBus\Core\Models\NewsArticle;
+use FuteBus\Core\Models\NewsCategory;
 use FuteBus\Core\Models\Promotion;
 use FuteBus\Core\Services\HomeService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class HomeController extends Controller
@@ -142,5 +144,52 @@ class HomeController extends Controller
             ->values();
 
         return view('core::schedules', compact('scheduleGroups'));
+    }
+
+    public function news(Request $request)
+    {
+        $category = $request->string('category')->trim()->toString();
+        $search = $request->string('q')->trim()->toString();
+
+        $categories = NewsCategory::active()->orderBy('sort_order')->get();
+        $query = NewsArticle::published()
+            ->with('category')
+            ->when($category, fn ($builder) => $builder->whereHas(
+                'category',
+                fn ($categoryQuery) => $categoryQuery->where('slug', $category)->where('is_active', true),
+            ))
+            ->when($search, fn ($builder) => $builder->where(function ($searchQuery) use ($search) {
+                $searchQuery->where('title', 'like', "%{$search}%")
+                    ->orWhere('summary', 'like', "%{$search}%");
+            }));
+
+        $featuredArticles = (clone $query)
+            ->where('is_featured', true)
+            ->homepageOrder()
+            ->limit(5)
+            ->get();
+
+        $spotlightArticles = NewsArticle::published()
+            ->with('category')
+            ->whereHas('category', fn ($categoryQuery) => $categoryQuery
+                ->where('slug', 'futa-city-bus')
+                ->where('is_active', true))
+            ->orderByDesc('published_at')
+            ->limit(3)
+            ->get();
+
+        $articles = $query
+            ->orderByDesc('published_at')
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('core::news', compact(
+            'articles',
+            'categories',
+            'category',
+            'featuredArticles',
+            'search',
+            'spotlightArticles',
+        ));
     }
 }
