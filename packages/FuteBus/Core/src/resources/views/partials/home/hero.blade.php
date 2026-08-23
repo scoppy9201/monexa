@@ -13,6 +13,7 @@
     }
 
     .hero-search-grid.is-round-trip .hero-return-field {
+        overflow: visible;
         opacity: 1;
         pointer-events: auto;
     }
@@ -47,7 +48,14 @@
     }
 </style>
 
-<section class="futa-hero-backdrop px-3 pt-2 pb-[58px] sm:px-4" x-data="{ roundTrip: false, returnDate: '' }">
+@php
+    $today = now();
+@endphp
+
+<section
+    class="futa-hero-backdrop px-3 pt-2 pb-14.5 sm:px-4"
+    x-data="futaHeroSearch(@js(app()->getLocale()), @js($today->format('Y-m-d')))"
+>
     <div class="mx-auto aspect-1128/310 w-full max-w-282 overflow-hidden rounded-xl border border-white/60 bg-[#fff7f1] shadow-[0_6px_14px_rgba(67,31,18,.26)] max-sm:aspect-16/7">
         <img
             src="{{ asset('images/banners/home-banner.jpg') }}"
@@ -56,29 +64,36 @@
         >
     </div>
 
-    <form class="relative mx-auto mt-8 w-full max-w-282 rounded-[18px] bg-white px-6 pt-[26px] pb-[42px] hero-form-border max-sm:px-4" action="#" method="GET">
-        <div class="mb-[21px] flex items-center justify-between gap-4">
+    <form class="relative mx-auto mt-8 w-full max-w-282 rounded-[18px] bg-white px-6 pt-6.5 pb-10.5 hero-form-border max-sm:px-4" action="#" method="GET">
+        <div class="mb-5.25 flex items-center justify-between gap-4">
             <div class="flex items-center gap-7 max-sm:gap-4">
                 <label class="flex cursor-pointer items-center gap-2 font-bold transition-colors duration-200" :class="!roundTrip ? 'text-[#ef5222]' : 'text-gray-500'">
-                    <input type="radio" name="trip_type" value="one_way" checked class="h-[17px] w-[17px] accent-[#ef5222]" @change="roundTrip = false">
+                    <input
+                        type="radio"
+                        name="trip_type"
+                        value="one_way"
+                        checked
+                        class="h-4.25 w-4.25 accent-[#ef5222]"
+                        @change="setRoundTrip(false)"
+                    >
                     <span>{{ __('core::app.home.hero.one_way') }}</span>
                 </label>
                 <label class="flex cursor-pointer items-center gap-2 font-bold transition-colors duration-200" :class="roundTrip ? 'text-[#ef5222]' : 'text-gray-500'">
-                    <input type="radio" name="trip_type" value="round_trip" class="h-[17px] w-[17px] accent-[#ef5222]" @change="roundTrip = true">
+                    <input
+                        type="radio"
+                        name="trip_type"
+                        value="round_trip"
+                        class="h-4.25 w-4.25 accent-[#ef5222]"
+                        @change="setRoundTrip(true)"
+                    >
                     <span>{{ __('core::app.home.hero.round_trip') }}</span>
                 </label>
             </div>
             <a href="#" class="text-sm font-medium text-[#ef5222]">{{ __('core::app.home.hero.guide') }}</a>
         </div>
 
-        @php
-            $today = now();
-            $isoDay = (int) $today->isoFormat('d');
-            $dayOfWeek = $isoDay === 7 ? 'CN' : 'Thứ ' . ($isoDay + 1);
-        @endphp
-
         <div
-            class="hero-search-grid grid grid-cols-1 items-end gap-[15px] md:grid-cols-2"
+            class="hero-search-grid grid grid-cols-1 items-end gap-3.75 md:grid-cols-2"
             :class="{ 'is-round-trip': roundTrip }"
         >
             <div>
@@ -86,13 +101,21 @@
                 <input
                     type="text"
                     name="departure"
+                    x-model="departure"
                     placeholder="{{ __('core::app.home.hero.from_placeholder') }}"
                     class="h-16.75 w-full rounded-[10px] border border-gray-300 bg-white px-4.5 text-base text-gray-900 outline-none placeholder:text-center placeholder:text-gray-400 focus:border-[#ff8a65] focus:ring-3 focus:ring-[#ef5222]/10"
                 >
             </div>
 
-            <button type="button" class="z-10 mb-3.75 -mx-1.75 hidden size-9.25 place-items-center rounded-full border border-gray-200 bg-white text-[#ef5222] shadow-sm lg:grid" aria-label="{{ __('core::app.home.hero.swap_aria') }}">
-                <x-heroicon-o-arrows-right-left class="size-4.75" />
+            <button
+                type="button"
+                @click="swapLocations"
+                class="group z-10 mb-3.75 -mx-1.75 hidden size-9.25 place-items-center rounded-full border border-gray-200 bg-white text-[#ef5222] shadow-sm transition hover:border-[#ef5222] hover:shadow-md lg:grid"
+                aria-label="{{ __('core::app.home.hero.swap_aria') }}"
+            >
+                <x-heroicon-o-arrows-right-left
+                    class="size-4.75 transition-transform duration-300 ease-out group-hover:rotate-180"
+                />
             </button>
 
             <div>
@@ -100,48 +123,30 @@
                 <input
                     type="text"
                     name="destination"
+                    x-model="destination"
                     placeholder="{{ __('core::app.home.hero.to_placeholder') }}"
                     class="h-16.75 w-full rounded-[10px] border border-gray-300 bg-white px-4.5 text-base text-gray-900 outline-none placeholder:text-center placeholder:text-gray-400 focus:border-[#ff8a65] focus:ring-3 focus:ring-[#ef5222]/10"
                 >
             </div>
 
-            <div>
-                <label class="mb-2 ml-4 block text-sm font-bold text-gray-900">{{ __('core::app.home.hero.date') }}</label>
-                <input type="hidden" name="departure_date" value="{{ $today->format('Y-m-d') }}">
-                <div class="flex h-16.75 w-full items-center justify-between rounded-[10px] border border-gray-300 bg-white px-4.5 focus-within:border-[#ff8a65] focus-within:ring-3 focus-within:ring-[#ef5222]/10">
-                    <div>
-                        <span class="text-[22px] font-bold leading-tight text-gray-900">{{ $today->format('d/m/Y') }}</span>
-                        <span class="block text-[13px] font-medium leading-tight text-gray-600">{{ $dayOfWeek }}</span>
-                    </div>
-                    <x-heroicon-o-calendar-days class="size-5 text-gray-400" />
-                </div>
-            </div>
+            @include('core::partials.home.date-picker', [
+                'picker' => 'departure',
+                'name' => 'departure_date',
+                'label' => __('core::app.home.hero.date'),
+                'placeholder' => __('core::app.home.hero.date'),
+            ])
 
             <div
                 class="hero-return-field"
                 :aria-hidden="(!roundTrip).toString()"
                 x-cloak
             >
-                <label class="mb-2 ml-4 block text-sm font-bold text-gray-900">
-                    {{ __('core::app.home.hero.return_date') }}
-                </label>
-                <div class="relative h-16.75">
-                    <input
-                        type="date"
-                        name="return_date"
-                        x-model="returnDate"
-                        :disabled="!roundTrip"
-                        class="absolute inset-0 z-10 size-full cursor-pointer opacity-0"
-                    >
-                    <div class="flex size-full items-center justify-between rounded-[10px] border border-gray-300 bg-white px-4.5">
-                        <span
-                            class="truncate text-base font-semibold"
-                            :class="returnDate ? 'text-gray-900' : 'text-gray-400'"
-                            x-text="returnDate ? returnDate.split('-').reverse().join('/') : @js(__('core::app.home.hero.return_placeholder'))"
-                        ></span>
-                        <x-heroicon-o-calendar-days class="size-5 shrink-0 text-gray-400" />
-                    </div>
-                </div>
+                @include('core::partials.home.date-picker', [
+                    'picker' => 'return',
+                    'name' => 'return_date',
+                    'label' => __('core::app.home.hero.return_date'),
+                    'placeholder' => __('core::app.home.hero.return_placeholder'),
+                ])
             </div>
 
             <div
@@ -160,7 +165,7 @@
                     class="flex h-16.75 w-full items-center justify-between rounded-[10px] border border-gray-300 bg-white px-4.5 text-lg font-medium text-gray-900 outline-none transition-colors hover:border-[#ff8a65] focus:border-[#ff8a65] focus:ring-3 focus:ring-[#ef5222]/10"
                 >
                     <span x-text="selected"></span>
-                    <span class="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-gray-100">
+                    <span class="flex size-7.5 items-center justify-center rounded-lg bg-gray-100">
                         <x-heroicon-o-chevron-down
                             class="size-4 text-gray-500 transition-transform duration-200"
                             ::class="open ? 'rotate-180' : ''"
@@ -201,7 +206,7 @@
             </div>
         </div>
 
-        <button type="submit" class="absolute bottom-[-24px] left-1/2 h-[49px] w-[calc(100%-48px)] max-w-[264px] -translate-x-1/2 rounded-full bg-[#ef5222] text-base font-extrabold text-white shadow-[0_8px_18px_rgba(239,82,34,.28)] transition hover:-translate-y-0.5 hover:bg-[#e94512]">
+        <button type="submit" class="absolute -bottom-6 left-1/2 h-12.25 w-[calc(100%-48px)] max-w-66 -translate-x-1/2 rounded-full bg-[#ef5222] text-base font-extrabold text-white shadow-[0_8px_18px_rgba(239,82,34,.28)] transition hover:-translate-y-0.5 hover:bg-[#e94512]">
             {{ __('core::app.home.hero.search') }}
         </button>
     </form>

@@ -120,7 +120,7 @@
     <nav class="h-16 sm:h-19.5" aria-label="{{ __('core::app.home.navbar.primary_navigation') }}">
         <div class="scrollbar-hidden mx-auto flex h-16 max-w-250 items-center justify-center gap-[clamp(28px,3.2vw,58px)] overflow-x-auto px-4 sm:h-19.5 max-md:justify-start">
             <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.home') }}</a>
-            <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.schedules') }}</a>
+            <a href="{{ route('schedules') }}" class="{{ request()->routeIs('schedules') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.schedules') }}</a>
             <a href="{{ route('ticket-lookup') }}" class="{{ request()->routeIs('ticket-lookup') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.lookup') }}</a>
             <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.news') }}</a>
             <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.invoice') }}</a>
