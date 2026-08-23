@@ -16,6 +16,7 @@
 </head>
 <body class="overflow-x-hidden bg-white text-gray-900">
     <?php echo $__env->yieldContent('content'); ?>
+    <?php echo $__env->make('core::partials.floating-support', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 </body>
 </html>
 <?php /**PATH D:\laragon\www\FUTABUS\packages\FuteBus\Core\src\Providers/../resources/views/layouts/home.blade.php ENDPATH**/ ?>

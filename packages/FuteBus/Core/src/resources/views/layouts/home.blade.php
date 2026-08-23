@@ -16,5 +16,6 @@
 </head>
 <body class="overflow-x-hidden bg-white text-gray-900">
     @yield('content')
+    @include('core::partials.floating-support')
 </body>
 </html>

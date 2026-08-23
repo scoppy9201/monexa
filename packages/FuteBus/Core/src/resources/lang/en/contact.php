@@ -1,0 +1,42 @@
+<?php
+
+return [
+    'meta' => [
+        'title'       => 'Contact - FUTA Bus Lines',
+        'description' => 'Contact FUTA Bus Lines for prompt advice and support.',
+    ],
+    'title'            => 'Contact us',
+    'company'          => 'Phuong Trang Passenger Bus Joint Stock Company - FUTA Bus Lines',
+    'address_label'    => 'Address:',
+    'address'          => '486-486A Le Van Luong Street, Tan Hung Ward, Ho Chi Minh City, Vietnam.',
+    'website_label'    => 'Website:',
+    'phone_label'      => 'Phone:',
+    'fax_label'        => 'Fax:',
+    'email_label'      => 'Email:',
+    'hotline_label'    => 'Hotline:',
+    'form_title'       => 'Send your contact information to us',
+    'department'       => 'FUTA Bus Lines',
+    'name'             => 'Full name',
+    'email'            => 'Email',
+    'phone'            => 'Phone number',
+    'subject'          => 'Enter subject',
+    'message'          => 'Enter your message',
+    'send'             => 'Send',
+    'success'          => 'Your information has been sent. FUTA Bus Lines will respond as soon as possible.',
+    'floating_support' => 'Contact support',
+    'validation'       => [
+        'required' => 'Please enter your :attribute.',
+        'email'    => 'The :attribute format is invalid.',
+        'max'      => 'The :attribute may not exceed :max characters.',
+        'regex'    => 'The :attribute format is invalid.',
+        'in'       => 'The selected :attribute is invalid.',
+    ],
+    'attributes'       => [
+        'department' => 'contact department',
+        'name'       => 'full name',
+        'email'      => 'email address',
+        'phone'      => 'phone number',
+        'subject'    => 'subject',
+        'message'    => 'message',
+    ],
+];

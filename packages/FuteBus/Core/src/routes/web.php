@@ -24,3 +24,5 @@ Route::get('/chinh-sach/ho-tro-khach-hang', [HomeController::class, 'customerSup
 Route::get('/danh-sach-chi-nhanh', [HomeController::class, 'branches'])->name('branches');
 Route::get('/lich-trinh', [HomeController::class, 'schedules'])->name('schedules');
 Route::get('/tin-tuc', [HomeController::class, 'news'])->name('news');
+Route::get('/lien-he', [HomeController::class, 'contact'])->name('contact');
+Route::post('/lien-he', [HomeController::class, 'submitContact'])->name('contact.submit');

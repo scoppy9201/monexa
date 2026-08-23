@@ -124,7 +124,7 @@
             <a href="{{ route('ticket-lookup') }}" class="{{ request()->routeIs('ticket-lookup') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.lookup') }}</a>
             <a href="{{ route('news') }}" class="{{ request()->routeIs('news') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.news') }}</a>
             <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.invoice') }}</a>
-            <a href="#" class="py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.contact') }}</a>
+            <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact*') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.contact') }}</a>
             <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.about') }}</a>
         </div>
     </nav>
