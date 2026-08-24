@@ -23,6 +23,19 @@ return [
         'show' => 'Hiện mật khẩu',
         'hide' => 'Ẩn mật khẩu',
     ],
+    'terms' => [
+        'consent_prefix' => 'Tôi đã đọc và đồng ý với',
+        'privacy_policy' => 'Chính sách bảo mật',
+        'consent_suffix' => 'của FUTA Bus Lines.',
+    ],
+    'otp' => [
+        'heading' => 'Nhập mã xác thực',
+        'sent_prefix' => 'Mã xác thực đã được gửi về email',
+        'digit' => 'Chữ số mã xác thực',
+        'continue' => 'Tiếp tục',
+        'countdown' => 'Thời gian còn lại',
+        'resend' => 'Gửi lại mã',
+    ],
     'login' => [
         'page_title' => 'Đăng nhập',
         'heading' => 'Đăng nhập tài khoản',
@@ -32,13 +45,12 @@ return [
     'register' => [
         'page_title' => 'Đăng ký',
         'heading' => 'Tạo tài khoản',
-        'consent_prefix' => 'Tôi đã đọc và đồng ý với',
-        'privacy_policy' => 'Chính sách bảo mật',
-        'consent_suffix' => 'của FUTA Bus Lines.',
         'submit' => 'Tiếp tục',
-        'otp_heading' => 'Nhập mã xác thực',
-        'otp_sent_prefix' => 'Mã xác thực đã được gửi về email',
-        'otp_digit' => 'Chữ số mã xác thực',
-        'otp_countdown' => 'Thời gian còn lại',
+    ],
+    'forgot_password' => [
+        'page_title' => 'Quên mật khẩu',
+        'heading' => 'Quên mật khẩu',
+        'send_code' => 'Gửi mã xác thực',
+        'back' => 'Quay lại',
     ],
 ];
