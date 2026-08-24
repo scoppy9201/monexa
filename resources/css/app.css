@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @source "../../packages/FuteBus/Core/src/resources/views/**/*.blade.php";
+@source "../../packages/FuteBus/Auth/src/resources/views/**/*.blade.php";
 
 [x-cloak] {
     display: none !important;
