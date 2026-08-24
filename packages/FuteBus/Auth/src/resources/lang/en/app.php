@@ -23,6 +23,19 @@ return [
         'show' => 'Show password',
         'hide' => 'Hide password',
     ],
+    'terms' => [
+        'consent_prefix' => 'I have read and agree to the',
+        'privacy_policy' => 'Privacy Policy',
+        'consent_suffix' => 'of FUTA Bus Lines.',
+    ],
+    'otp' => [
+        'heading' => 'Enter verification code',
+        'sent_prefix' => 'A verification code was sent to',
+        'digit' => 'Verification code digit',
+        'continue' => 'Continue',
+        'countdown' => 'Time remaining',
+        'resend' => 'Resend code',
+    ],
     'login' => [
         'page_title' => 'Sign in',
         'heading' => 'Sign in to your account',
@@ -32,13 +45,12 @@ return [
     'register' => [
         'page_title' => 'Register',
         'heading' => 'Create an account',
-        'consent_prefix' => 'I have read and agree to the',
-        'privacy_policy' => 'Privacy Policy',
-        'consent_suffix' => 'of FUTA Bus Lines.',
         'submit' => 'Continue',
-        'otp_heading' => 'Enter verification code',
-        'otp_sent_prefix' => 'A verification code was sent to',
-        'otp_digit' => 'Verification code digit',
-        'otp_countdown' => 'Time remaining',
+    ],
+    'forgot_password' => [
+        'page_title' => 'Forgot password',
+        'heading' => 'Forgot password',
+        'send_code' => 'Send verification code',
+        'back' => 'Go back',
     ],
 ];

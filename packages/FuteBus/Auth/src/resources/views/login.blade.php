@@ -23,7 +23,7 @@
             </label>
 
             <button type="submit" class="h-11 rounded-full bg-[#ef5222] text-sm font-bold text-white transition hover:bg-[#d94317] active:scale-[.99]">{{ __('Auth::app.login.submit') }}</button>
-            <a href="#" class="-mt-2 text-[13px] text-[#ef5222]">{{ __('Auth::app.login.forgot_password') }}</a>
+            <a href="{{ route('password.request') }}" class="-mt-2 text-[13px] text-[#ef5222]">{{ __('Auth::app.login.forgot_password') }}</a>
         </form>
     </div>
 @endsection

@@ -1,97 +1,106 @@
 import '../css/app.css';
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('authRegistration', () => ({
-        step: 'email',
-        email: '',
-        otp: Array(6).fill(''),
-        secondsRemaining: 117,
-        countdownTimer: null,
+const createOtpFlow = () => ({
+    step: 'email',
+    email: '',
+    otp: Array(6).fill(''),
+    secondsRemaining: 117,
+    countdownTimer: null,
 
-        requestOtp() {
-            this.step = 'otp';
-            this.startCountdown();
-            this.$nextTick(() => this.otpInputs()[0]?.focus());
-        },
+    requestOtp() {
+        this.step = 'otp';
+        this.startCountdown();
+        this.$nextTick(() => this.otpInputs()[0]?.focus());
+    },
 
-        startCountdown() {
-            window.clearInterval(this.countdownTimer);
-            this.secondsRemaining = 117;
+    startCountdown() {
+        window.clearInterval(this.countdownTimer);
+        this.secondsRemaining = 117;
 
-            this.countdownTimer = window.setInterval(() => {
-                if (this.secondsRemaining === 0) {
-                    window.clearInterval(this.countdownTimer);
-                    return;
-                }
-
-                this.secondsRemaining -= 1;
-            }, 1000);
-        },
-
-        handleOtpInput(index, event) {
-            const digit = event.target.value.replace(/\D/g, '').slice(-1);
-
-            this.otp[index] = digit;
-            event.target.value = digit;
-
-            if (digit && index < this.otp.length - 1) {
-                this.otpInputs()[index + 1]?.focus();
-            }
-        },
-
-        handleOtpKeydown(index, event) {
-            if (event.key === 'Backspace' && ! this.otp[index] && index > 0) {
-                this.otpInputs()[index - 1]?.focus();
-            }
-
-            if (event.key === 'ArrowLeft' && index > 0) {
-                event.preventDefault();
-                this.otpInputs()[index - 1]?.focus();
-            }
-
-            if (event.key === 'ArrowRight' && index < this.otp.length - 1) {
-                event.preventDefault();
-                this.otpInputs()[index + 1]?.focus();
-            }
-        },
-
-        handleOtpPaste(event) {
-            const digits = event.clipboardData
-                .getData('text')
-                .replace(/\D/g, '')
-                .slice(0, this.otp.length)
-                .split('');
-
-            if (digits.length === 0) {
+        this.countdownTimer = window.setInterval(() => {
+            if (this.secondsRemaining === 0) {
+                window.clearInterval(this.countdownTimer);
                 return;
             }
 
+            this.secondsRemaining -= 1;
+        }, 1000);
+    },
+
+    resendOtp() {
+        this.otp = Array(6).fill('');
+        this.startCountdown();
+        this.$nextTick(() => this.otpInputs()[0]?.focus());
+    },
+
+    handleOtpInput(index, event) {
+        const digit = event.target.value.replace(/\D/g, '').slice(-1);
+
+        this.otp[index] = digit;
+        event.target.value = digit;
+
+        if (digit && index < this.otp.length - 1) {
+            this.otpInputs()[index + 1]?.focus();
+        }
+    },
+
+    handleOtpKeydown(index, event) {
+        if (event.key === 'Backspace' && ! this.otp[index] && index > 0) {
+            this.otpInputs()[index - 1]?.focus();
+        }
+
+        if (event.key === 'ArrowLeft' && index > 0) {
             event.preventDefault();
-            this.otp = this.otp.map((_, index) => digits[index] ?? '');
-            this.$nextTick(() => this.otpInputs()[Math.min(digits.length, this.otp.length) - 1]?.focus());
-        },
+            this.otpInputs()[index - 1]?.focus();
+        }
 
-        submitOtp() {
-            const firstEmptyIndex = this.otp.findIndex((digit) => digit === '');
+        if (event.key === 'ArrowRight' && index < this.otp.length - 1) {
+            event.preventDefault();
+            this.otpInputs()[index + 1]?.focus();
+        }
+    },
 
-            if (firstEmptyIndex !== -1) {
-                this.otpInputs()[firstEmptyIndex]?.focus();
-            }
-        },
+    handleOtpPaste(event) {
+        const digits = event.clipboardData
+            .getData('text')
+            .replace(/\D/g, '')
+            .slice(0, this.otp.length)
+            .split('');
 
-        otpInputs() {
-            return [...this.$root.querySelectorAll('[data-otp-input]')];
-        },
+        if (digits.length === 0) {
+            return;
+        }
 
-        formattedCountdown() {
-            const minutes = Math.floor(this.secondsRemaining / 60);
-            const seconds = String(this.secondsRemaining % 60).padStart(2, '0');
+        event.preventDefault();
+        this.otp = this.otp.map((_, index) => digits[index] ?? '');
+        this.$nextTick(() => this.otpInputs()[Math.min(digits.length, this.otp.length) - 1]?.focus());
+    },
 
-            return `${String(minutes).padStart(2, '0')}:${seconds}`;
-        },
+    submitOtp() {
+        const firstEmptyIndex = this.otp.findIndex((digit) => digit === '');
 
-        destroy() {
-            window.clearInterval(this.countdownTimer);
-        },
-    }));
+        if (firstEmptyIndex !== -1) {
+            this.otpInputs()[firstEmptyIndex]?.focus();
+        }
+    },
+
+    otpInputs() {
+        return [...this.$root.querySelectorAll('[data-otp-input]')];
+    },
+
+    formattedCountdown() {
+        const minutes = Math.floor(this.secondsRemaining / 60);
+        const seconds = String(this.secondsRemaining % 60).padStart(2, '0');
+
+        return `${String(minutes).padStart(2, '0')}:${seconds}`;
+    },
+
+    destroy() {
+        window.clearInterval(this.countdownTimer);
+    },
+});
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('authRegistration', createOtpFlow);
+    Alpine.data('authPasswordRecovery', createOtpFlow);
 });
