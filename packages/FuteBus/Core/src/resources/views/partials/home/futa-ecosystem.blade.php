@@ -1,4 +1,6 @@
 @php
+    $compact = $compact ?? false;
+
     $ecosystemItems = [
         [
             'label' => __('core::app.home.futa_ecosystem.items.contract_car'),
@@ -23,10 +25,10 @@
     ];
 @endphp
 
-<section class="bg-white py-10 sm:py-12">
+<section @class(['bg-white', 'py-9 sm:py-10' => $compact, 'py-10 sm:py-12' => ! $compact])>
     <div class="mx-auto w-full max-w-282 px-4 sm:px-6 lg:px-0">
         <header class="text-center">
-            <h2 class="text-2xl font-extrabold uppercase leading-tight text-[#00613d] xl:text-3xl">
+            <h2 @class(['text-2xl font-extrabold leading-tight text-[#00613d] xl:text-3xl', 'uppercase' => ! $compact])>
                 {{ __('core::app.home.futa_ecosystem.title') }}
             </h2>
             <p class="mx-auto mt-2 max-w-2xl text-sm leading-5 text-[#4a342e] sm:text-base sm:leading-6">
