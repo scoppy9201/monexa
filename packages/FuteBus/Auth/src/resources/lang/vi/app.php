@@ -36,5 +36,9 @@ return [
         'privacy_policy' => 'Chính sách bảo mật',
         'consent_suffix' => 'của FUTA Bus Lines.',
         'submit' => 'Tiếp tục',
+        'otp_heading' => 'Nhập mã xác thực',
+        'otp_sent_prefix' => 'Mã xác thực đã được gửi về email',
+        'otp_digit' => 'Chữ số mã xác thực',
+        'otp_countdown' => 'Thời gian còn lại',
     ],
 ];

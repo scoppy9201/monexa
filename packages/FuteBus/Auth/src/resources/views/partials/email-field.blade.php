@@ -7,6 +7,7 @@
         name="email"
         autocomplete="email"
         placeholder="{{ __('Auth::app.fields.email_placeholder') }}"
+        @if($bindModel ?? false) x-model.trim="email" @endif
         required
     >
 </label>

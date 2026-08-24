@@ -36,5 +36,9 @@ return [
         'privacy_policy' => 'Privacy Policy',
         'consent_suffix' => 'of FUTA Bus Lines.',
         'submit' => 'Continue',
+        'otp_heading' => 'Enter verification code',
+        'otp_sent_prefix' => 'A verification code was sent to',
+        'otp_digit' => 'Verification code digit',
+        'otp_countdown' => 'Time remaining',
     ],
 ];
