@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FuteBus\Auth\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,7 +16,9 @@ class AuthServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'Auth');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'Auth');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'Auth');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'Auth');
+
+        Route::middleware('web')->group(__DIR__.'/../routes/web.php');
     }
 }

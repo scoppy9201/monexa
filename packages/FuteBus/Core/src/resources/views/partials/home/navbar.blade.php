@@ -1,5 +1,7 @@
+@php($compact = $compact ?? false)
+
 <header class="futa-header-pattern relative z-20 text-white">
-    <div class="h-15.5 sm:h-18">
+    <div @class(['h-21 sm:h-27.5' => $compact, 'h-15.5 sm:h-18' => ! $compact])>
         <div class="relative mx-auto flex h-15.5 w-[calc(100%-24px)] max-w-282 items-center justify-between sm:h-18 sm:w-[calc(100%-32px)]">
             <div class="flex items-center gap-3.5">
                 {{-- Language dropdown --}}
@@ -117,7 +119,7 @@
         </div>
     </div>
 
-    <nav class="h-16 sm:h-19.5" aria-label="{{ __('core::app.home.navbar.primary_navigation') }}">
+    <nav @class(['hidden' => $compact, 'h-16 sm:h-19.5' => ! $compact]) aria-label="{{ __('core::app.home.navbar.primary_navigation') }}">
         <div class="scrollbar-hidden mx-auto flex h-16 max-w-250 items-center justify-center gap-[clamp(28px,3.2vw,58px)] overflow-x-auto px-4 sm:h-19.5 max-md:justify-start">
             <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.home') }}</a>
             <a href="{{ route('schedules') }}" class="{{ request()->routeIs('schedules') ? 'futa-nav-active relative' : '' }} py-5.75 text-sm font-extrabold whitespace-nowrap">{{ __('core::app.home.navbar.schedules') }}</a>

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('web')->group(function () {
-    Route::get('/Auth', function () {
-        return view('Auth::index');
-    })->name('Auth.index');
+Route::middleware('guest')->group(function (): void {
+    Route::view('/dang-nhap', 'Auth::login')->name('login');
+    Route::view('/dang-ky', 'Auth::register')->name('register');
 });

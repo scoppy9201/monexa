@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', fn () => view('Auth::login'))->name('login');
-Route::get('/register', fn () => view('Auth::register'))->name('register');
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
 
